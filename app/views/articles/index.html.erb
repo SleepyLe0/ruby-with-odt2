@@ -1,13 +1,15 @@
 <h1>Articles</h1>
-<a href="<%= new_article_path() %>">
-    <h1>Create new article</h1>
-</a>
-<% @articles.each do |article| %>
-  <a href="<%= article_path(article) %>">
-    <div>
-      <h2><%= article.title %></h2>
-      <p><%= article.body %></p>
-    </div>
-  </a>
-  <hr>
-<% end %>
+<%= link_to "New Article", new_article_path %>
+<ul>
+  <% @articles.each do |article| %>
+    <h1><%= article.title %></h1>
+    <p><%= article.body %></p>
+    <ul>
+      <li><%= link_to "Edit", edit_article_path(article) %></li>
+      <li><%= link_to "Destroy", article_path(article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+    </ul>
+  <% end %>
+</ul>
